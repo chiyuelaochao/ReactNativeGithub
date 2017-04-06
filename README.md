@@ -1,3 +1,3 @@
 # ReactNativeGithub
 </br>
-![image](https://raw.githubusercontent.com/chiyuelaochao/ReactNativeGithub/master/show/rn-github.gif)
+![image](https://raw.githubusercontent.com/chiyuelaochao/ReactNativeGithub/master/show/rngithub.gif)
