@@ -14,7 +14,7 @@ import TabNavigator from 'react-native-tab-navigator';
 import PopularPage from '../../src/page/PopularPage';
 import TrendingPage from '../../src/page/TrendingPage';
 import FavoritePage from '../../src/page/FavoritePage';
-import YourPage from '../../src/page/YourPage';
+import MyPage from './MyPage';
 
 export default class HomePage extends Component {
     constructor(props) {
@@ -62,14 +62,14 @@ export default class HomePage extends Component {
                 </TabNavigator.Item>
 
                 <TabNavigator.Item
-                    onPress={()=>this.setState({selectedTab:'your'})}
-                    selected={this.state.selectedTab==='your'}
-                    title="Your"
+                    onPress={()=>this.setState({selectedTab:'my'})}
+                    selected={this.state.selectedTab==='my'}
+                    title="my"
                     selectedTitleStyle={styles.selectedTitleStyle}
                     renderSelectedIcon={()=><Image style={[styles.icon,styles.selectedIconStyle]} source={require('../../res/images/ic_my.png')}/>}
                     renderIcon={()=><Image style={styles.icon} source={require('../../res/images/ic_my.png')}/>}>
 
-                    <YourPage/>
+                    <MyPage {...this.props}/>
                 </TabNavigator.Item>
 
             </TabNavigator>

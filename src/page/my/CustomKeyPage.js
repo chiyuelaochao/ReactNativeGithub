@@ -1,5 +1,5 @@
 /**
- * Created by Cai Wei on 4/6/2017.
+ * Created by Cai Wei on 4/11/2017.
  */
 import React, {Component} from 'react';
 import {
@@ -7,21 +7,22 @@ import {
     StyleSheet,
     Text,
     View,
-    Image
+    Image,
+    TouchableOpacity
 } from 'react-native';
 
+import NavigationBar from "../../component/NavigationBar";
 
-export default class Your extends Component {
+export default class CustomKeyPage extends Component {
     render() {
         return <View style={styles.container}>
-            <Text>Your</Text>
+            <NavigationBar title='Custom Key'/>
         </View>
     }
 }
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        backgroundColor: 'green'
+        flex: 1
     }
 });

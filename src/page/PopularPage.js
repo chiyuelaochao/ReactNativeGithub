@@ -23,10 +23,10 @@ export default class PopularPage extends Component {
             languages: ["Android", "IOS", "Java", "React", "JS"]
         };
     }
-
+    
     render() {
         return <View style={styles.container}>
-            <NavigationBar/>
+            <NavigationBar title='Popular'/>
             <ScrollableTabView
                 tabBarBackgroundColor="#63B8FF"
                 tabBarActiveTextColor="#FFF"

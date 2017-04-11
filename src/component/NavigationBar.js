@@ -21,8 +21,11 @@ export default class NavigationBar extends Component {
                 <StatusBar hidden={false} barStyle="light-content"/>
             </View>
             <View style={styles.navBar}>
+                <View style={styles.LeftBtn}>
+
+                </View>
                 <View style={styles.titleWrapper}>
-                    <Text style={styles.title}>Popular</Text>
+                    <Text style={styles.title}>{this.props.title}</Text>
                 </View>
                 <View style={styles.rightBtn}>
                     <TouchableOpacity
@@ -48,22 +51,28 @@ const styles = StyleSheet.create({
         height: Platform.OS === 'ios' ? 20 : 0
     },
     navBar: {
-        flexDirection: 'column',
+        flexDirection: 'row',
     },
     navBtn: {
         width: 24,
         height: 24
     },
-    rightBtn: {
-        position: 'absolute',
+    LeftBtn: {
+        flex: 1,
         flexDirection: 'row',
         alignItems: 'center',
-        paddingRight: 8,
-        alignSelf: 'flex-end'
+        justifyContent: 'flex-start',
+    },
+
+    rightBtn: {
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'flex-end',
     },
     titleWrapper: {
-        alignSelf: 'center',
-        alignItems: 'center'
+        flex: 2,
+        alignItems: 'center',
     },
     title: {
         fontSize: 16,
