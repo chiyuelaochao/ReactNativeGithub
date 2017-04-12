@@ -16,33 +16,26 @@ import {
 
 export default class NavigationBar extends Component {
     render() {
-        return <View style={styles.container}>
+        return <View style={barStyles.container}>
             <View>
                 <StatusBar hidden={false} barStyle="light-content"/>
             </View>
-            <View style={styles.navBar}>
-                <View style={styles.LeftBtn}>
-
+            <View style={barStyles.navBar}>
+                <View style={barStyles.LeftBtn}>
+                    {this.props.leftBtn}
                 </View>
-                <View style={styles.titleWrapper}>
-                    <Text style={styles.title}>{this.props.title}</Text>
+                <View style={barStyles.titleWrapper}>
+                    <Text style={barStyles.title}>{this.props.title}</Text>
                 </View>
-                <View style={styles.rightBtn}>
-                    <TouchableOpacity
-                        activeOpative={0.7}>
-                        <Image source={require('../../res/images/ic_search_white_48pt.png')} style={styles.navBtn}/>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        activeOpacity={0.7}>
-                        <Image source={require('../../res/images/ic_more_vert_white_48pt.png')} style={styles.navBtn}/>
-                    </TouchableOpacity>
+                <View style={barStyles.rightBtn}>
+                    {this.props.rightBtn}
                 </View>
             </View>
         </View>
     }
 }
 
-const styles = StyleSheet.create({
+ const barStyles = StyleSheet.create({
     container: {
         backgroundColor: '#63B8FF',
         padding: 5,
@@ -53,17 +46,12 @@ const styles = StyleSheet.create({
     navBar: {
         flexDirection: 'row',
     },
-    navBtn: {
-        width: 24,
-        height: 24
-    },
     LeftBtn: {
         flex: 1,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'flex-start',
     },
-
     rightBtn: {
         flex: 1,
         flexDirection: 'row',

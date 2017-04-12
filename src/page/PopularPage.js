@@ -9,7 +9,8 @@ import {
     View,
     Image,
     ListView,
-    RefreshControl
+    RefreshControl,
+    TouchableOpacity
 } from 'react-native';
 
 import NavigationBar from '../component/NavigationBar'
@@ -23,10 +24,23 @@ export default class PopularPage extends Component {
             languages: ["Android", "IOS", "Java", "React", "JS"]
         };
     }
-    
+
+    renderRightBtn() {
+        return <View style={styles.rightBtn}>
+            <TouchableOpacity
+                activeOpative={0.7}>
+                <Image source={require('../../res/images/ic_search_white_48pt.png')} style={styles.navBtn}/>
+            </TouchableOpacity>
+            <TouchableOpacity
+                activeOpacity={0.7}>
+                <Image source={require('../../res/images/ic_more_vert_white_48pt.png')} style={styles.navBtn}/>
+            </TouchableOpacity>
+        </View>
+    }
+
     render() {
         return <View style={styles.container}>
-            <NavigationBar title='Popular'/>
+            <NavigationBar title='Popular' rightBtn={this.renderRightBtn()}/>
             <ScrollableTabView
                 tabBarBackgroundColor="#63B8FF"
                 tabBarActiveTextColor="#FFF"
@@ -108,5 +122,15 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: 'white'
+    },
+    rightBtn: {
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'flex-end',
+    },
+    navBtn: {
+        width: 24,
+        height: 24
     }
 });
