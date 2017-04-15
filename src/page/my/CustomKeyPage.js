@@ -13,7 +13,8 @@ import {
 } from 'react-native';
 
 import NavigationBar from "../../component/NavigationBar";
-import CheckBox from 'react-native-check-box'
+import CheckBoxFixed from "../../component/CheckBoxFixed";
+// import CheckBox from 'react-native-check-box'
 import Toast from "react-native-easy-toast";
 
 export default class CustomKeyPage extends Component {
@@ -61,7 +62,7 @@ export default class CustomKeyPage extends Component {
 
     renderCheckBox() {
         return this.state.data.map((item, i)=> {
-            return <CheckBox
+            return <CheckBoxFixed
                 key={`box${i}`}
                 style={styles.checkboxStyle}
                 onClick={this.handleClick.bind(this,item)}
@@ -89,6 +90,7 @@ export default class CustomKeyPage extends Component {
             if (value !== null) {
                 // this.setState({data: JSON.parse(value)});
                 console.log(value);
+                this.setState({data: JSON.parse(value)});
             }
         });
 
