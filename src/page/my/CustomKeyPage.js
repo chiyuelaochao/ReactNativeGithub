@@ -10,10 +10,13 @@ import {
     Image,
     TouchableOpacity,
     AsyncStorage,
+    Alert
 } from 'react-native';
 
 import NavigationBar from "../../component/NavigationBar";
 import CheckBoxFixed from "../../component/CheckBoxFixed";
+import ArrayUtils from '../../utils/ArrayUtils'
+
 // import CheckBox from 'react-native-check-box'
 import Toast from "react-native-easy-toast";
 
@@ -31,10 +34,29 @@ export default class CustomKeyPage extends Component {
         }
     }
 
+    handleBack = ()=> {
+        // clear the tasks in the top of the stack
+        if (ArrayUtils.isEqual(this.originData, this.state.data)) {
+            this.doBack();
+        } else {
+            Alert.alert('Tips', 'Save the changes?',
+                [
+                    {text: 'No', onPress: ()=>(this.doBack())},
+                    {text: 'Yes', onPress: ()=>(this.handleSave())}
+                ]
+            );
+        }
+    }
+
+    doBack = ()=> {
+        this.props.navigator.pop();
+    }
+
     renderLeftBtn() {
         return <View style={styles.navBtn}>
             <TouchableOpacity
-                activeOpative={0.7}>
+                activeOpative={0.7}
+                onPress={this.handleBack}>
                 <Image source={require('../../../res/images/ic_arrow_back_white_36pt.png')} style={styles.navBtn}/>
             </TouchableOpacity>
         </View>
@@ -43,7 +65,10 @@ export default class CustomKeyPage extends Component {
 
     handleSave() {
         AsyncStorage.setItem('custom_key', JSON.stringify(this.state.data))
-            .then(()=>this.refs.toast.show('Save success'));
+            .then(()=> {
+                this.refs.toast.show('Save success');
+                this.doBack();
+            });
     }
 
     renderRightBtn() {
@@ -91,6 +116,7 @@ export default class CustomKeyPage extends Component {
                 // this.setState({data: JSON.parse(value)});
                 console.log(value);
                 this.setState({data: JSON.parse(value)});
+                this.originData = ArrayUtils.clone(this.state.data);
             }
         });
 
