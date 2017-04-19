@@ -7,7 +7,8 @@ import {
     StyleSheet,
     Text,
     View,
-    Image
+    Image,
+    DeviceEventEmitter
 } from 'react-native';
 
 import TabNavigator from 'react-native-tab-navigator';
@@ -74,6 +75,20 @@ export default class HomePage extends Component {
 
             </TabNavigator>
         </View>
+    }
+
+    componentDidMount() {
+        //添加事件监听
+        this.listener = DeviceEventEmitter.addListener('HOMEPAGE_RELOAD', (n)=> {
+            //Homepage reLoad and route to new page and rest the whole router
+            this.props.navigator.resetTo({
+                component: HomePage
+            });
+        });
+    }
+
+    componentWillUnmount() {
+        this.listener.remove();
     }
 }
 

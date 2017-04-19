@@ -11,7 +11,8 @@ import {
     ListView,
     RefreshControl,
     TouchableOpacity,
-    AsyncStorage
+    AsyncStorage,
+    DeviceEventEmitter
 } from 'react-native';
 
 import NavigationBar from '../component/NavigationBar'

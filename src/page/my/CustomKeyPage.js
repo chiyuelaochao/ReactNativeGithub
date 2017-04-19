@@ -10,7 +10,8 @@ import {
     Image,
     TouchableOpacity,
     AsyncStorage,
-    Alert
+    Alert,
+    DeviceEventEmitter
 } from 'react-native';
 
 import NavigationBar from "../../component/NavigationBar";
@@ -63,11 +64,12 @@ export default class CustomKeyPage extends Component {
 
     }
 
-    handleSave() {
+    handleSave = ()=> {
         AsyncStorage.setItem('custom_key', JSON.stringify(this.state.data))
             .then(()=> {
                 this.refs.toast.show('Save success');
                 this.doBack();
+                DeviceEventEmitter.emit('HOMEPAGE_RELOAD','HomePage_ReLoad');
             });
     }
 

@@ -13,11 +13,18 @@ import {
 
 import NavigationBar from '../component/NavigationBar'
 import CustomKeyPage from './my/CustomKeyPage'
+import SortKeyPage from './my/SortKeyPage'
 
 export default class MyPage extends Component {
-    goToCustomKeyPage() {
+    goToPage(key) {
+        let page;
+        if (key === 'Custom') {
+            page = CustomKeyPage;
+        } else if (key === 'Sort') {
+            page = SortKeyPage;
+        }
         this.props.navigator.push({
-            component: CustomKeyPage
+            component: page
         });
     }
 
@@ -33,8 +40,15 @@ export default class MyPage extends Component {
             <NavigationBar title='My' rightBtn={this.renderRightBtn()}/>
             <View style={styles.buttonWrapper}>
                 <TouchableOpacity activeOpacity={0.7}>
-                    <Text onPress={this.goToCustomKeyPage.bind(this)}>
+                    <Text onPress={this.goToPage.bind(this,'Custom')}>
                         Custom Category
+                    </Text>
+                </TouchableOpacity>
+            </View>
+            <View style={styles.buttonWrapper}>
+                <TouchableOpacity activeOpacity={0.7}>
+                    <Text onPress={this.goToPage.bind(this,'Sort')}>
+                        Category Sort
                     </Text>
                 </TouchableOpacity>
             </View>
