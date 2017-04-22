@@ -48,7 +48,7 @@ export default class HomePage extends Component {
                     renderSelectedIcon={()=><Image style={[styles.icon,styles.selectedIconStyle]} source={require('../../res/images/ic_trending.png')}/>}
                     renderIcon={()=><Image style={styles.icon} source={require('../../res/images/ic_trending.png')}/>}>
 
-                    <TrendingPage/>
+                    <TrendingPage {...this.props}/>
                 </TabNavigator.Item>
 
                 <TabNavigator.Item
@@ -59,7 +59,7 @@ export default class HomePage extends Component {
                     renderSelectedIcon={()=><Image style={[styles.icon,styles.selectedIconStyle]} source={require('../../res/images/ic_favorite.png')}/>}
                     renderIcon={()=><Image style={styles.icon} source={require('../../res/images/ic_favorite.png')}/>}>
 
-                    <FavoritePage/>
+                    <FavoritePage {...this.props}/>
                 </TabNavigator.Item>
 
                 <TabNavigator.Item

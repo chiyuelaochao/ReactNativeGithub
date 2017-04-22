@@ -66,13 +66,9 @@ export default class PopularPage extends Component {
         </View>
     }
 
-    componentWillMount = ()=> {
-        console.log('componentWillMount');
+    componentWillMount() {
         this.loadLanguages();
-    }
-    componentDidMount = ()=> {
-        console.log('componentDidMount');
-    }
+    };
 
     loadLanguages = ()=> {
         AsyncStorage.getItem('custom_key').then((value)=> {
@@ -87,7 +83,7 @@ export default class PopularPage extends Component {
 class PopularTab extends Component {
     static defaultProps = {
         tabLabel: 'Android'
-    }
+    };
 
     constructor(props) {
         super(props);
@@ -104,15 +100,15 @@ class PopularTab extends Component {
             component: DetailPage,
             params: {title: obj.full_name, url: obj.html_url}
         });
-    }
+    };
 
     renderRow = (obj)=> {
         return <ProjectRow item={obj} onSelect={()=>this.handleProjectSelect(obj)}/>
-    }
+    };
 
     handleRefresh = ()=> {
         this.loadData();
-    }
+    };
 
     render() {
         return <View style={styles.container}>
@@ -124,7 +120,7 @@ class PopularTab extends Component {
                     refreshing={this.state.isLoading}
                     onRefresh={this.handleRefresh}
                     tintColor='#63B8FF'
-                    title='loding'
+                    title='loading...'
                     titleColor='#63B8FF'
                     colors={['#63B8FF']}
                     />
@@ -133,9 +129,9 @@ class PopularTab extends Component {
         </View>
     }
 
-    componentDidMount = ()=> {
+    componentDidMount() {
         this.loadData();
-    }
+    };
 
     loadData() {
         this.setState({isLoading: true});
@@ -164,7 +160,7 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'flex-end',
+        justifyContent: 'flex-end'
     },
     navBtn: {
         width: 24,
