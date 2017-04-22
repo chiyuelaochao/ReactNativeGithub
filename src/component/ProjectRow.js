@@ -8,7 +8,8 @@ import {
     Text,
     View,
     Image,
-    ListView
+    ListView,
+    TouchableOpacity
 } from 'react-native';
 
 export default class ProjectRow extends Component {
@@ -18,21 +19,25 @@ export default class ProjectRow extends Component {
 
     render() {
         var item = this.props.item;
-        return <View style={styles.container}>
-            <Text style={styles.title}>{item.full_name}</Text>
-            <Text style={styles.description}>{item.description}</Text>
-            <View style={styles.bottom}>
-                <View style={styles.bottomTextWrapper}>
-                    <Text>Avatar：</Text>
-                    <Image style={{width:22,height:22}} source={{uri:item.owner.avatar_url}}/>
+        return <TouchableOpacity
+            activeOpacity={0.5}
+            onPress={this.props.onSelect}>
+            <View style={styles.container}>
+                <Text style={styles.title}>{item.full_name}</Text>
+                <Text style={styles.description}>{item.description}</Text>
+                <View style={styles.bottom}>
+                    <View style={styles.bottomTextWrapper}>
+                        <Text>Avatar：</Text>
+                        <Image style={{width:22,height:22}} source={{uri:item.owner.avatar_url}}/>
+                    </View>
+                    <View style={styles.bottomTextWrapper}>
+                        <Text>Stars：</Text>
+                        <Text>{item.stargazers_count}</Text>
+                    </View>
+                    <Image source={require("../../res/images/ic_unstar_transparent.png")} style={{width:22,height:22}}/>
                 </View>
-                <View style={styles.bottomTextWrapper}>
-                    <Text>Stars：</Text>
-                    <Text>{item.stargazers_count}</Text>
-                </View>
-                <Image source={require("../../res/images/ic_unstar_transparent.png")} style={{width:22,height:22}}/>
             </View>
-        </View>;
+        </TouchableOpacity>;
     }
 }
 

@@ -18,6 +18,7 @@ import {
 import NavigationBar from '../component/NavigationBar'
 import ScrollableTabView from 'react-native-scrollable-tab-view'
 import ProjectRow from '../component/ProjectRow'
+import DetailPage from './DetailPage'
 
 export default class PopularPage extends Component {
     constructor(props) {
@@ -57,7 +58,8 @@ export default class PopularPage extends Component {
                 tabBarUnderlineStyle={{backgroundColor:"#E7E7E7",height:2}}>
                 {
                     this.state.languages.map((item, i)=> {
-                        return item.isChecked ? <PopularTab key={`tab${i}`} tabLabel={item.name}/> : null;
+                        return item.isChecked ?
+                            <PopularTab {...this.props} key={`tab${i}`} tabLabel={item.name}/> : null;
                     })
                 }
             </ScrollableTabView>
@@ -95,8 +97,17 @@ class PopularTab extends Component {
         };
     }
 
-    renderRow(obj) {
-        return <ProjectRow item={obj}/>
+    handleProjectSelect = (obj)=> {
+        console.log(obj.full_name);
+        console.log(obj.html_url);
+        this.props.navigator.push({
+            component: DetailPage,
+            params: {title: obj.full_name, url: obj.html_url}
+        });
+    }
+
+    renderRow = (obj)=> {
+        return <ProjectRow item={obj} onSelect={()=>this.handleProjectSelect(obj)}/>
     }
 
     handleRefresh = ()=> {

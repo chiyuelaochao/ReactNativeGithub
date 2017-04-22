@@ -16,7 +16,7 @@ export default function AppSetup() {
     class Root extends Component {
         renderScene(route, navigator) {
             let Page = route.component;
-            return <Page navigator={navigator}/>
+            return <Page {...route.params} navigator={navigator}/>
         }
 
         /*
@@ -28,7 +28,7 @@ export default function AppSetup() {
 
          传参：{{component : HomePage,params:{title:'ABC'}}}
          configureScene={route=>Navigator.SceneConfigs.FadeAndroid} 设置动画*/
-        
+
         render() {
             return (
                 <View style={styles.container}>

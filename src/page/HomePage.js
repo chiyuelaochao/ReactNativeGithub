@@ -37,7 +37,7 @@ export default class HomePage extends Component {
                     renderSelectedIcon={()=><Image style={[styles.icon,styles.selectedIconStyle]} source={require('../../res/images/ic_popular.png')}/>}
                     renderIcon={()=><Image style={styles.icon} source={require('../../res/images/ic_popular.png')}/>}>
 
-                    <PopularPage/>
+                    <PopularPage {...this.props}/>
                 </TabNavigator.Item>
 
                 <TabNavigator.Item
