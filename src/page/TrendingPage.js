@@ -166,7 +166,7 @@ class TrendingTab extends Component {
         </View>;
     }
 
-    componentDidMount = ()=> {
+    componentDidMount() {
         this.loadData();
     }
 }

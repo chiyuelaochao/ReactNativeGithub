@@ -30,11 +30,12 @@ export default class PopularPage extends Component {
                 {name: 'Java', isChecked: true},
                 {name: 'React', isChecked: true},
                 {name: 'JS', isChecked: true}
-            ]
+            ],
+            favoritePopularData: []
         };
     }
 
-    renderRightBtn() {
+    renderRightBtn = () => {
         return <View style={styles.rightBtn}>
             <TouchableOpacity
                 activeOpative={0.7}>
@@ -45,10 +46,10 @@ export default class PopularPage extends Component {
                 <Image source={require('../../res/images/ic_more_vert_white_48pt.png')} style={styles.navBtn}/>
             </TouchableOpacity>
         </View>
-    }
+    };
 
     render() {
-        console.log('render');
+        // console.log('render');
         return <View style={styles.container}>
             <NavigationBar title='Popular' rightBtn={this.renderRightBtn()}/>
             <ScrollableTabView
@@ -58,8 +59,14 @@ export default class PopularPage extends Component {
                 tabBarUnderlineStyle={{backgroundColor:"#E7E7E7",height:2}}>
                 {
                     this.state.languages.map((item, i)=> {
-                        return item.isChecked ?
-                            <PopularTab {...this.props} key={`tab${i}`} tabLabel={item.name}/> : null;
+                        return item.isChecked
+                            ? <PopularTab
+                            {...this.props}
+                            key={`tab${i}`}
+                            tabLabel={item.name}
+                            isFavorite={(item)=>this.isFavorite(item)}
+                            onFavorite={(obj)=>this.addToFavoritePopularData(obj)}/>
+                            : null;
                     })
                 }
             </ScrollableTabView>
@@ -68,15 +75,61 @@ export default class PopularPage extends Component {
 
     componentWillMount() {
         this.loadLanguages();
+        this.getFavoritePopularData();
     };
 
     loadLanguages = ()=> {
         AsyncStorage.getItem('custom_key').then((value)=> {
             if (value != null) {
                 this.setState({languages: JSON.parse(value)});
-                console.log(this.state.languages);
+                // console.log(this.state.languages);
             }
         });
+    };
+
+    saveFavoritePopularData = ()=> {
+        AsyncStorage.setItem('favorite_popular', JSON.stringify(this.state.favoritePopularData))
+            .then(()=> {
+                this.refs.toast.show('Save success');
+            });
+    };
+
+    getFavoritePopularData = ()=> {
+        AsyncStorage.getItem('favorite_popular').then((value)=> {
+            if (value != null) {
+                this.setState({favoritePopularData: JSON.parse(value)});
+                console.log(this.state.favoritePopularData);
+            }
+        });
+    };
+
+    addToFavoritePopularData = (obj)=> {
+        if (this.state.favoritePopularData.indexOf(obj) == -1) {
+            this.state.favoritePopularData.push(obj);
+        }
+        /*else {
+         this.setState({
+         favoritePopularData: remove(this.state.favoritePopularData, obj)
+         });
+         }*/
+        this.saveFavoritePopularData();
+        console.log(this.state.favoritePopularData);
+    };
+
+    isFavorite = (obj)=> {
+        let is = this.state.favoritePopularData.indexOf(obj) != -1;
+        console.log(is);
+        return is;
+    };
+
+
+    remove = (arr, item)=> {
+        for (var i = arr.length - 1; i >= 0; i--) {
+            if (arr[i] === item) {
+                arr.splice(i, 1);
+            }
+        }
+        return arr;
     }
 }
 
@@ -94,21 +147,25 @@ class PopularTab extends Component {
     }
 
     handleProjectSelect = (obj)=> {
-        console.log(obj.full_name);
-        console.log(obj.html_url);
         this.props.navigator.push({
             component: DetailPage,
-            params: {title: obj.full_name, url: obj.html_url}
+            params: {title: obj.full_name, url: obj.html_url, item: obj}
         });
     };
 
     renderRow = (obj)=> {
-        return <ProjectRow item={obj} onSelect={()=>this.handleProjectSelect(obj)}/>
+        return <ProjectRow
+            item={obj}
+            onSelect={()=>this.handleProjectSelect(obj)}
+            onFavoriteClick={()=>this.props.onFavorite(obj)}
+            isFavorite={()=>this.props.isFavorite(obj)}
+        />
     };
 
-    handleRefresh = ()=> {
-        this.loadData();
-    };
+    /*handleFavorite = (obj)=> {
+     console.log('handleFavorite');
+     console.log(obj);
+     };*/
 
     render() {
         return <View style={styles.container}>
@@ -128,6 +185,10 @@ class PopularTab extends Component {
             />
         </View>
     }
+
+    handleRefresh = ()=> {
+        this.loadData();
+    };
 
     componentDidMount() {
         this.loadData();

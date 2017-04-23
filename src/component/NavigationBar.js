@@ -20,10 +20,11 @@ export default class NavigationBar extends Component {
         rightButton: PropTypes.element,
         leftButton: PropTypes.element,
         titleView: PropTypes.element
-    }
+    };
+    
     static defaultProps = {
         title: ''
-    }
+    };
 
     renderTitle = ()=> {
         let view = (this.props.title.length != 0)
@@ -32,7 +33,7 @@ export default class NavigationBar extends Component {
         return <View style={barStyles.titleWrapper}>
             {view}
         </View>;
-    }
+    };
 
     render() {
         return <View style={barStyles.container}>
@@ -59,29 +60,29 @@ export default class NavigationBar extends Component {
 const barStyles = StyleSheet.create({
     container: {
         backgroundColor: '#63B8FF',
-        padding: 5,
+        padding: 5
     },
     statusBar: {
         height: Platform.OS === 'ios' ? 20 : 0
     },
     navBar: {
-        flexDirection: 'row',
+        flexDirection: 'row'
     },
     LeftBtn: {
         flex: 1,
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'flex-start',
+        justifyContent: 'flex-start'
     },
     rightBtn: {
         flex: 1,
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'flex-end',
+        justifyContent: 'flex-end'
     },
     titleWrapper: {
         flex: 2,
-        alignItems: 'center',
+        alignItems: 'center'
     },
     title: {
         fontSize: 16,

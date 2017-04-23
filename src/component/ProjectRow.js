@@ -13,9 +13,16 @@ import {
 } from 'react-native';
 
 export default class ProjectRow extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            isFavorite: false
+        };
+    }
+
     static defaultProps = {
         item: {}
-    }
+    };
 
     render() {
         var item = this.props.item;
@@ -34,10 +41,18 @@ export default class ProjectRow extends Component {
                         <Text>Stars：</Text>
                         <Text>{item.stargazers_count}</Text>
                     </View>
-                    <Image source={require("../../res/images/ic_unstar_transparent.png")} style={{width:22,height:22}}/>
+                    <TouchableOpacity activeOpacity={0.5} onPress={this.props.onFavoriteClick}>
+                        <Image source={this.state.isFavorite?require("../../res/images/ic_star.png")
+                        :require("../../res/images/ic_unstar_transparent.png")}
+                               style={styles.favoriteImageStyle}/>
+                    </TouchableOpacity>
                 </View>
             </View>
         </TouchableOpacity>;
+    }
+
+    componentWillReceiveProps() {
+        this.setState({isFavorite: this.props.isFavorite});
     }
 }
 
@@ -77,6 +92,10 @@ let styles = StyleSheet.create({
     bottomTextWrapper: {
         flexDirection: 'row',
         alignItems: 'center'
+    },
+    favoriteImageStyle: {
+        width: 22,
+        height: 22
     }
 
 });

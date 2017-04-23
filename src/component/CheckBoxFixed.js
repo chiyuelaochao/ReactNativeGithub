@@ -19,7 +19,6 @@ import {
     TouchableHighlight
 } from 'react-native'
 
-
 export default class CheckBoxFixed extends Component {
     constructor(props) {
         super(props);
@@ -41,12 +40,13 @@ export default class CheckBoxFixed extends Component {
         onClick: React.PropTypes.func.isRequired,
         isChecked: React.PropTypes.bool
 
-    }
+    };
+
     static defaultProps = {
         isChecked: false,
         leftTextStyle: {},
         rightTextStyle: {}
-    }
+    };
 
     _renderLeft() {
         if (this.props.leftTextView)return this.props.leftTextView;
@@ -84,7 +84,7 @@ export default class CheckBoxFixed extends Component {
     onClick() {
         this.setState({
             isChecked: !this.state.isChecked
-        })
+        });
         this.props.onClick();
     }
 
@@ -115,10 +115,10 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     leftText: {
-        flex: 1,
+        flex: 1
     },
     rightText: {
         flex: 1,
         marginLeft: 10
     }
-})
+});
