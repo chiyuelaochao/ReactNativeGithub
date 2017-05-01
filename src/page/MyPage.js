@@ -14,6 +14,7 @@ import {
 import NavigationBar from '../component/NavigationBar'
 import CustomKeyPage from './my/CustomKeyPage'
 import SortKeyPage from './my/SortKeyPage'
+import ToastAndroid from '../component/ToastAndroid'
 
 export default class MyPage extends Component {
     goToPage(key) {
@@ -26,6 +27,10 @@ export default class MyPage extends Component {
         this.props.navigator.push({
             component: page
         });
+    }
+
+    showAndroidNative(){
+        ToastAndroid.show("I am an Android toast!", ToastAndroid.SHORT);
     }
 
     renderRightBtn() {
@@ -49,6 +54,13 @@ export default class MyPage extends Component {
                 <TouchableOpacity activeOpacity={0.7}>
                     <Text onPress={this.goToPage.bind(this,'Sort')}>
                         Category Sort
+                    </Text>
+                </TouchableOpacity>
+            </View>
+            <View style={styles.buttonWrapper}>
+                <TouchableOpacity activeOpacity={0.7}>
+                    <Text onPress={this.showAndroidNative}>
+                        Android Native
                     </Text>
                 </TouchableOpacity>
             </View>
