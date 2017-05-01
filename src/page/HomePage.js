@@ -16,6 +16,7 @@ import PopularPage from '../../src/page/PopularPage';
 import TrendingPage from '../../src/page/TrendingPage';
 import FavoritePage from '../../src/page/FavoritePage';
 import MyPage from './MyPage';
+import SplashScreen from 'react-native-splash-screen'
 
 export default class HomePage extends Component {
     constructor(props) {
@@ -78,6 +79,7 @@ export default class HomePage extends Component {
     }
 
     componentDidMount() {
+        SplashScreen.hide();
         //添加事件监听
         this.listener = DeviceEventEmitter.addListener('HOMEPAGE_RELOAD', (n)=> {
             //Homepage reLoad and route to new page and rest the whole router
