@@ -20,6 +20,7 @@ import ScrollableTabView from "react-native-scrollable-tab-view";
 import DetailPage from './DetailPage';
 import Popover from "../component/Popover";
 import TrendingProjectRow from "../component/TrendingProjectRow";
+import MenuMore from "../component/MenuMore";
 
 var popular_def_lans = require('../../res/data/popular_def_lans.json');
 
@@ -76,9 +77,10 @@ export default class TrendingPage extends Component {
     };
 
     renderRightBtn = () => {
-        return <View style={styles.rightBtn}>
+        return <View style={styles.rightBtn} ref="moreMenuButton">
             <TouchableOpacity
-                activeOpacity={0.7}>
+                activeOpacity={0.7}
+                onPress={()=>this.refs.moreMenu.showPopover()}>
                 <Image source={require('../../res/images/ic_more_vert_white_48pt.png')} style={styles.navBtn}/>
             </TouchableOpacity>
         </View>
@@ -130,6 +132,8 @@ export default class TrendingPage extends Component {
                 placement="bottom">
                 {this.renderTimeMap()}
             </Popover>
+
+            <MenuMore ref="moreMenu" anchorView={()=>this.refs.moreMenuButton}/>
         </View>
     }
 }

@@ -15,12 +15,12 @@ import {
 export default class TrendingProjectRow extends Component {
     static defaultProps = {
         item: {}
-    }
+    };
 
     renderContributors(data) {
         var views = [];
         for (var i = 0; i < data.length; i++) {
-            views.push(<Image style={{width:22,height:22}} source={{uri:data[i]}}/>);
+            views.push(<Image key={'view'+i} style={{width:22,height:22}} source={{uri:data[i]}}/>);
             if (i > 1) {
                 break;
             }
