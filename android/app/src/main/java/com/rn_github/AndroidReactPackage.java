@@ -5,6 +5,7 @@ import com.facebook.react.bridge.JavaScriptModule;
 import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.uimanager.ViewManager;
+import com.rn_github.react.DialogAndroid;
 import com.rn_github.react.ToastAndroid;
 
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ public class AndroidReactPackage implements ReactPackage {
     public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
         List<NativeModule> list = new ArrayList<>();
         list.add(new ToastAndroid(reactContext));
+        list.add(new DialogAndroid(reactContext));
         return list;
     }
 

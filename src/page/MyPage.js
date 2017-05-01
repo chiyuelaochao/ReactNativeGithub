@@ -15,6 +15,7 @@ import NavigationBar from '../component/NavigationBar'
 import CustomKeyPage from './my/CustomKeyPage'
 import SortKeyPage from './my/SortKeyPage'
 import ToastAndroid from '../component/ToastAndroid'
+import DialogAndroid from '../component/DialogAndroid'
 
 export default class MyPage extends Component {
     goToPage(key) {
@@ -30,7 +31,11 @@ export default class MyPage extends Component {
     }
 
     showAndroidNative(){
-        ToastAndroid.show("I am an Android toast!", ToastAndroid.SHORT);
+        DialogAndroid.alert(result=>{
+            ToastAndroid.show(result,ToastAndroid.LONG);
+        },error=>{
+            console.log(error);
+        });
     }
 
     renderRightBtn() {
